@@ -4,7 +4,7 @@ from email.message import EmailMessage
 def notification(message):
     try:
         message = json.loads(message)
-        me3_fid = message["mp3_fid"]
+        mp3_fid = message["mp3_fid"]
         sender_address = os.environ.get("GMAIL_ADDRESS")
         sender_password = os.environ.get("GMAIL_PASSWORD")
         receiver_address = message["username"]
@@ -15,7 +15,7 @@ def notification(message):
         msg["From"] = sender_address
         msg["To"] = receiver_address
 
-        session = smtplib.SMTP("smtp.gmail.com")
+        session = smtplib.SMTP("smtp.gmail.com", 587)
         session.starttls()
         session.login(sender_address, sender_password)
         session.send_message(msg, sender_address, receiver_address)
