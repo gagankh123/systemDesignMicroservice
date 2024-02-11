@@ -20,7 +20,7 @@ def login():
         return "missing credentials", 401
 
     # check db for user name and password
-    cur = mysql.connection.curson()
+    cur = mysql.connection.cursor()
     res = cur.execute(
             "SELECT email, password from user WHERE email=%s", (auth.username,)
             )
